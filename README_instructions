@@ -1,0 +1,28 @@
+########## Instructions for running the trigger search pipeline #################
+I have provided here the series of scripts that I used to search for, and rank, 
+candidate TDMD trigger sites. Most of the code is written in R, with one module
+written in Python. I am by no means an experienced coder, so although the code 
+provided here is functional, it could certainly be stream-lined by someone with
+more coding experience than myself. Although parts of the code are automated,
+the trigger search pipeline as I've coded it does require a decent amount of user
+supervision.
+
+Computational pipeline (and general notes):
+1. Generate a long list of all potential candidate TDMD trigger sites with 
+	1_TDMD_trigger_finder.R
+2. Parse this list based on loop length and RNAseq information using
+	2_TDMD_trigger_narrower_looplength.R
+3. Pass the output of 2 into the python script 3_trigger_miRNA_duplex_energy.py
+	to determine the duplex energy and the duplex structure for the trigger/
+	miRNA pair
+4. Pass the output of 3 back into R to parse out a list of the top 100 'best'
+	candidate sites (as ranked by duplex energy) with 4_TDMD_trigger_narrower_energy.R
+5. From 4 you will have a set of 4 .txt files in fasta format with the sequences of the
+	most energetically favorable sites. To think about site conservation, information
+	about the genomic location is needed for each of these sites. To do this, upload
+	each of the .txt files to the BLAT feature on UCSC genome browser to generate a list
+	of locations in the genome that these sequences align to. Copy the text of the BLAT 
+	results into a .txt file
+6. Take these .txt files generated in 5, and pass them into 5_trigger_conservation_analyses.R
+	to determine conservation of the predicted trigger region and to generate a final 
+	list of putative candidate sites.
