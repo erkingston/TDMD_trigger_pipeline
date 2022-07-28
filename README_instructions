@@ -26,3 +26,11 @@ Computational pipeline (and general notes):
 6. Take these .txt files generated in 5, and pass them into 5_trigger_conservation_analyses.R
 	to determine conservation of the predicted trigger region and to generate a final 
 	list of putative candidate sites.
+7. To select your top candidates to experimentally pursue from this list of candidate sites, consider 
+	three factors: 1. The energetics of base-pairing (lower delta G is preferable). 2. The 
+	conservation (higher conservation scores are preferrable). 3. The pairing architecture 
+	(examine the dot/bracket pairing diagrams, but also draw top candidates out by hand to assess
+	whether or not there are any G-U wobbles in the predicted pairing architecture).
+	For each miRNA, we selected the top two candidates as determined by these metrics for 
+	validation. For miR-7 and miR-277, additional candidates were later tested following the 
+	failure of the initial candidates to validate.
