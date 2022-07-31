@@ -17,15 +17,18 @@ Computational pipeline (and general notes):
 	miRNA pair
 4. Pass the output of 3 back into R to parse out a list of the top 100 'best'
 	candidate sites (as ranked by duplex energy) with 4_TDMD_trigger_narrower_energy.R
-5. From 4 you will have a set of 4 .txt files in fasta format with the sequences of the
-	most energetically favorable sites. To think about site conservation, information
-	about the genomic location is needed for each of these sites. To do this, upload
-	each of the .txt files to the BLAT feature on UCSC genome browser to generate a list
-	of locations in the genome that these sequences align to. Copy the text of the BLAT 
-	results into a .txt file
+	Note: in the final iteration of this pipeline, we looked at only the top 50
+	'best' candidate sites.
+5. From 4 you will have a set of 4 .txt files (or 2 .txt files if just the 50 top sites were
+	examined) in fasta format with the sequences of the most energetically favorable sites. 
+	To think about site conservation, information about the genomic location is needed for 
+	each of these sites. To do this, upload each of the .txt files to the BLAT feature on 
+	UCSC genome browser to generate a list of locations in the genome that these sequences 
+	align to. Copy the text of the BLAT results into a .txt file
 6. Take these .txt files generated in 5, and pass them into 5_trigger_conservation_analyses.R
 	to determine conservation of the predicted trigger region and to generate a final 
-	list of putative candidate sites.
+	list of putative candidate sites. Examples of these final lists for the 50 best 
+	candidate sites for select miRNAs are shown in the file Top50_candidates.
 7. To select your top candidates to experimentally pursue from this list of candidate sites, consider 
 	three factors: 1. The energetics of base-pairing (lower delta G is preferable). 2. The 
 	conservation (higher conservation scores are preferrable). 3. The pairing architecture 
